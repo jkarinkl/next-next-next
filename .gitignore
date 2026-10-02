@@ -1,3 +1,7 @@
-/target
+Cargo.lock
+target/
+.vscode/
+!.vscode/extensions.json
+
 *.csv
 *.csv.gz
