@@ -1,11 +1,15 @@
 # Don't edit the `bin` list manually! It is updated by `rustlings dev update`
 bin = [
   { name = "loops1", path = "exercises/00_loops/loops1.rs" },
-  { name = "loops1_sol", path = "solutions/00_loops/loops1.rs" },
+  { name = "loops2", path = "exercises/00_loops/loops2.rs" },
+  { name = "loops3", path = "exercises/00_loops/loops3.rs" },
+  { name = "loops4", path = "exercises/00_loops/loops4.rs" },
+  { name = "enumerate1", path = "exercises/01_enumerate/enumerate1.rs" },
+  { name = "enumerate2", path = "exercises/01_enumerate/enumerate2.rs" },
 ]
 
 [package]
-name = "exercises"
+name = "next-next-next"
 edition = "2024"
 # Don't publish the exercises on crates.io!
 publish = false

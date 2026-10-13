@@ -2,7 +2,7 @@ use std::{fmt::Display, fs::File};
 
 use jiff::civil::{Date, DateTime};
 
-/// Records of the train service dataset as it is described here: https://www.rijdendetreinen.nl/en/open-data/train-archive
+/// Records of the train service dataset as it is described here: <https://www.rijdendetreinen.nl/en/open-data/train-archive>
 /// The dataset is licensed under CC-BY by Rijden de Treinen
 #[derive(Debug, Clone, serde::Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Record {
@@ -140,9 +140,9 @@ impl Display for Record {
             stop_actual_platform,
         } = self;
 
-        write!(
+        writeln!(
             f,
-            "{service_type:?} {service_train_number} by {service_company} at {stop_station_name}:\n"
+            "{service_type:?} {service_train_number} by {service_company} at {stop_station_name}:"
         )?;
 
         if *stop_platform_change {
@@ -151,17 +151,17 @@ impl Display for Record {
                 "- on platform {stop_planned_platform} -> {stop_actual_platform}"
             )?;
         } else if !stop_planned_platform.is_empty() {
-            write!(f, "- on platform {stop_planned_platform}\n")?;
+            writeln!(f, "- on platform {stop_planned_platform}")?;
         };
 
         match (service_partly_cancelled, service_completely_cancelled) {
             (false, false) => {}
-            (true, false) => write!(f, "- partially cancelled\n")?,
-            (_, true) => write!(f, "- completely cancelled\n")?,
+            (true, false) => writeln!(f, "- partially cancelled")?,
+            (_, true) => writeln!(f, "- completely cancelled")?,
         }
 
         if *service_maximum_delay > 0 {
-            write!(f, "- worst delay {service_maximum_delay} min\n")?;
+            writeln!(f, "- worst delay {service_maximum_delay} min")?;
         }
 
         match (
@@ -169,15 +169,15 @@ impl Display for Record {
             stop_arrival_delay,
             stop_arrival_cancelled,
         ) {
-            (Some(time), Some(0), Some(false)) => write!(f, "- arrival at {time}\n")?,
+            (Some(time), Some(0), Some(false)) => writeln!(f, "- arrival at {time}")?,
             (Some(time), Some(delay), Some(false)) => {
-                write!(f, "- scheduled arrival at {time} delayed by {delay} min\n")?
+                writeln!(f, "- scheduled arrival at {time} delayed by {delay} min")?
             }
             (Some(time), Some(_), Some(true)) => {
-                write!(f, "- scheduled arrival at {time} cancelled\n")?
+                writeln!(f, "- scheduled arrival at {time} cancelled")?
             }
             (None, None, None) => {}
-            (_, _, _) => todo!(),
+            (_, _, _) => unreachable!(),
         }
 
         match (
@@ -185,16 +185,16 @@ impl Display for Record {
             stop_departure_delay,
             stop_departure_cancelled,
         ) {
-            (Some(time), Some(0), Some(false)) => write!(f, "- departure at {time}\n")?,
-            (Some(time), Some(delay), Some(false)) => write!(
+            (Some(time), Some(0), Some(false)) => writeln!(f, "- departure at {time}")?,
+            (Some(time), Some(delay), Some(false)) => writeln!(
                 f,
-                "- scheduled departure at {time:#} delayed by {delay} min\n"
+                "- scheduled departure at {time:#} delayed by {delay} min"
             )?,
             (Some(time), Some(_), Some(true)) => {
-                write!(f, "- scheduled departure at {time} cancelled\n")?
+                writeln!(f, "- scheduled departure at {time} cancelled")?
             }
             (None, None, None) => {}
-            (_, _, _) => todo!(),
+            (_, _, _) => unreachable!(),
         }
 
         Ok(())

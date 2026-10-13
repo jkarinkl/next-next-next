@@ -34,3 +34,28 @@ dir = "00_loops"
 
 # A multi-line hint to be shown to users on request.
 hint = """???"""
+
+[[exercises]]
+name = "loops2"
+dir = "00_loops"
+hint = """???"""
+
+[[exercises]]
+name = "loops3"
+dir = "00_loops"
+hint = """???"""
+
+[[exercises]]
+name = "loops4"
+dir = "00_loops"
+hint = """???"""
+
+[[exercises]]
+name = "enumerate1"
+dir = "01_enumerate"
+hint = """???"""
+
+[[exercises]]
+name = "enumerate2"
+dir = "01_enumerate"
+hint = """???"""
