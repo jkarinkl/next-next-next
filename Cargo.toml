@@ -17,8 +17,8 @@ opt-level = 2
 
 [dependencies]
 csv = "1.4.0"
-flate2 = "1.1.9"
-jiff = { version = "0.2.32", features = ["serde"] }
+flate2 = {version = "1.1.9", features = ["zlib-rs"], default-features = false }
+jiff = { version = "0.2.32", features = ["serde"], default-features = false }
 serde = { version = "1.0.228", features = ["derive"] }
 
 [lints.rust]
